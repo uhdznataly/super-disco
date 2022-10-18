@@ -1,17 +1,17 @@
 $(document).ready(function () {// tells engine to load 1)html & 2)css first.
     //display current day & time.
     $("#currentDay").text(moment().format("MMMM Do YYYY, h:mm:ss a")); // use of moment.js
-    //assign saveBtn click listener for user input and time stamp??
+    //assign saveBtn click listener for user input and time stamp
     $(".saveBtn").on("click", function () {
-        //get nearby values.
+        //get nearby values
         console.log(this);
         var text = $(this).siblings(".description").val(); // taken the change from the sibling html description attribute
         var time = $(this).parent().attr("id"); // taken the change from the parent html id attribute
 
-        //set items in local storage.
+        //set items in local storage
         localStorage.setItem(time, text);
     })
-    //load any saved data from LocalStorage - do this for each hour created. Should follow html 24 hour to 12 hour conversion.
+    //load any saved data from LocalStorage - do this for each hour created. 
     $("#hour0 .description").val(localStorage.getItem("hour0"));
     $("#hour1 .description").val(localStorage.getItem("hour1"));
     $("#hour2 .description").val(localStorage.getItem("hour2"));
@@ -38,7 +38,7 @@ $(document).ready(function () {// tells engine to load 1)html & 2)css first.
     $("#hour23 .description").val(localStorage.getItem("hour23"));
 
     function hourTracker() {
-        //get current number of hours.
+        //get current number of hours
         var currentHour = moment().hour(); // use of moment.js
 
         // loop over time blocks
@@ -46,7 +46,7 @@ $(document).ready(function () {// tells engine to load 1)html & 2)css first.
             var blockHour = parseInt($(this).attr("id").split("hour")[1]);
             console.log( blockHour, currentHour)
 
-            //check if we've moved past this time, click into css/html given classes of past, present, or future
+            //check if we've moved past this time given classes of past, present, or future
             if (blockHour < currentHour) {
                 $(this).addClass("past");
                 $(this).removeClass("future");
